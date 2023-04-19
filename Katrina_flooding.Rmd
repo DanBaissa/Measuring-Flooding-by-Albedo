@@ -9,3 +9,28 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+
+```{r}
+library(raster)
+```
+
+```{r}
+before <- stack("MCD43A3.A2005225.h10v06.061.2020242074349.hdf")
+
+plot(before)
+
+before <- before$BRDF_Albedo_Band_Mandatory_Quality_vis
+
+area <- c(-8895604, -8583654, 3223901, 3335852)
+
+# Create an extent object using the area coordinates
+area_extent <- extent(area)
+
+# Crop the raster
+before_cropped <- crop(before, area_extent)
+```
+
+```{r}
+plot(before_cropped)
+```
+
